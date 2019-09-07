@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QRadioButton" name="rbdriver">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>32</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;driver</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbassistant">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>30</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>assistant</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbselfdriving">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>30</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>self drivin&amp;g</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lmincd">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>131</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>min cruise distance</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="emergency">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>340</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>emergycy</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbslow">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>290</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>s&amp;low</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbmedium">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>290</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>medi&amp;um</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbfast">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>290</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>fas&amp;t</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="spinBox">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>240</y>
+     <width>48</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="ldeparture">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>110</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>departure</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lmode">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mode</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lopjpos">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>150</y>
+     <width>101</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>object position</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lcv">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>200</y>
+     <width>101</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>curise velocity</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lccs">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>300</y>
+     <width>141</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>cruise control speed</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lr_departure">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>110</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lr_objpos">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>150</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>200</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>240</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>rbdriver</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>driver()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>251</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbassistant</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>assistant()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>468</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>492</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbselfdriving</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>selfdriving()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>700</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>707</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbslow</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>slow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>330</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbmedium</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>medium()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>463</x>
+     <y>307</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbfast</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>fast()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>687</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>673</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>emergency</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>emerg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>418</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>355</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Form</receiver>
+   <slot>mmincd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>226</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mmincd()</slot>
+ </slots>
+</ui>
