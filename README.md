@@ -9,22 +9,25 @@ driving assistant
 partial self driving 
 
 
-Hardware component :
+## Hardware component :
+
 (raspberry pi 3+arduino as interface +lidar +accelerator بدال سرعة +camera +touch screen )+ encoder+
 
-Software component :
+
+## Software component :
 
 Linux (Ubuntu dist) +ROS +sensor fusion(with extended Kalmen filter ) +PID +opencv +QT +rosserial 
 
 
-Problem : 
+## Problem : 
+
 Detect lane departure ------.> solved by using opencv and lane detection technique
 
 Detect obstacle’s position and velocity ----> solved by using lidar or radar or both 
 
 Detect  the vehicle velocity -----> solved by using encoder 
 
-In the future 
+## In the future 
 
 Mapping and localization 
 Using artificial intelligent (AI)
@@ -38,7 +41,7 @@ Using c++ insteed of python for critical nodes(program)
 
 
 
-Reference and material for studying
+## Reference and material for studying
 
 
 Sensor fusion and lane detection concept
@@ -59,6 +62,6 @@ https://www.edx.org/course/hello-real-world-with-ros-robot-operating-system-2
 
 
 
-To contact us 
+## To contact us 
 
 https://www.linkedin.com/in/hesham-salem/
