@@ -1,8 +1,11 @@
 # parial-self-driving-using-ros
 
 Target الهدف
+
 driving mode  
+
 driving assistant 
+
 partial self driving 
 
 
@@ -32,10 +35,6 @@ Using c++ insteed of python for critical nodes(program)
 
 
 
-
-The project is open source you can find it on github
-
-https://github.com/hesham-salem/parial-self-driving-using-ros
 
 
 
