@@ -6,10 +6,9 @@
 #
 # Created by: PyQt5 UI code generator 5.10.1
 #
-# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import rospy
+import rospy # to handel ros node 
 from std_msgs.msg import String
 from std_msgs.msg import Byte
 from std_msgs.msg import Float32
