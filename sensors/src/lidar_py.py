@@ -5,8 +5,8 @@ from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
 import numpy as np
 import time 
-from sensors.msg import x_state
-x_state1 =x_state()
+from sensors.msg import z_vector
+z_vector1 =z_vector()
 
 global x_axis
 x_axis=[]
@@ -26,7 +26,7 @@ def the_main_fun():
 	
 	print 'test 1'	
 	sub_y=rospy.Subscriber('scan',LaserScan,mycallBack_fun)
-   	pub=rospy.Publisher('object_position',x_state, queue_size=10)
+   	pub=rospy.Publisher('raw measurements',z_vector, queue_size=10) 
         rospy.init_node('lidar_driver')
 	
         rate=rospy.Rate(1)
@@ -59,7 +59,7 @@ def the_main_fun():
 		print 'mini_distance'
 		print mini_distance
 		if mini_distance <3.5   :
-			x_state1.px=mini_distance
+			z_vector1.px=mini_distance
 		#mean_list.append(45+x_axis.index(mini_distance)*(360/len(x_axis)))
 	#	if len(mean_list)>30:
 	#		mean=max(mean_list,key=mean_list.count)
@@ -78,12 +78,12 @@ def the_main_fun():
 			last_time=time.time()
 		
 			velocity_x = delta_x/delta_time
-			x_state1.vx=velocity_x
+			z_vector1.vx=velocity_x
 		#	print mini_distance	
 			print delta_x
 			print delta_time
 			print velocity_x
-			pub.publish(x_state1)
+			pub.publish(z_vector1)
 	#		print (x_axis.index(mini_distance)*0.5)
 			
 
