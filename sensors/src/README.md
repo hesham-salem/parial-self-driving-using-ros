@@ -17,21 +17,23 @@ This project is implemented in C++ using the Eigen library. The source code is l
 The Kalman Filter works in a sequence of `Prediction` - `Update` cyclically computed. Each time a new measurement is received from one of the sensors, a prediction is computed first. 
 
 The Kalman Filter prediction equations are the following:
+![prediction](https://user-images.githubusercontent.com/36461250/150696894-ec885a3d-b427-4ab2-a5e9-f498c12d9962.JPG)
 
-![prediction](images/prediction.JPG)
 
 where `x` is the current state space, `x'` is the predicted state space and `u` is the control, which is zero in this case since we don't control the object's motion.
 
 `F` is the transition matrix describing the object's dynamics, `P` is the covariance matrix representing the uncertainty in the state space values, and `Q` is the prediction noise.
 
-Object position and velocity prediction is done assuming linear motion with zero acceleration,
+Object position and velocity predict
+ion is done assuming linear motion with zero acceleration,
 
-![linear_motion](images/linear_motion.JPG)
+![linear_motion](https://user-images.githubusercontent.com/36461250/150696929-0edbf2b0-df3d-47a0-ad23-e459baad6cde.JPG)
 
 
 which written in a matrix form is:
 
-![matrix_motion](images/matrix_motion.JPG)
+![matrix_motion](https://user-images.githubusercontent.com/36461250/150696949-3926baf7-f78f-4b6e-b6d0-b42424c0519f.JPG)
+
 
 
 To be able to predict state estimation, elapsed time and transition matrix are needed. The `dt` is simply the time between the previous timestamp and the one carrying the new measurement.
@@ -81,14 +83,16 @@ The `Q_` process noise takes into account that the prediction is known not to be
 Since the acceleration is unknown we can add it to the noise component. So, we have a
 random acceleration vector `ν` in this form:
 
-![acceleration_noise](images/acceleration_noise.JPG)
+![acceleration_noise](https://user-images.githubusercontent.com/36461250/150696973-e663fcdd-9e5c-4d9a-9361-a354e6c864f8.JPG)
+
 
 
 The acceleration is a random `[ax, ay]` vector with zero mean and standard deviation `σax` and `σay`.
 
 `ax` and `ay` are assumed uncorrelated noise processes, so after combining everything in one matrix we obtain our 4 by 4 `Q_` matrix:
 
-![Qmatrix](images/Qmatrix.JPG)
+![Qmatrix](https://user-images.githubusercontent.com/36461250/150696992-c5b353ec-63d5-41cf-9c6d-d7ce7669c6c6.JPG)
+
 
 
 The `σax` and `σay` implemented as `noise_ax` and `noise_ay` are given for the project to be `9.0` meters per second squared.
@@ -115,7 +119,8 @@ For the *Update* step, we need to know which sensor is sending the data. This in
 
 The Kalman Filter measurement update equations are the following:
 
-![measurement_update](images/measurement_update.JPG)
+![measurement_update](https://user-images.githubusercontent.com/36461250/150697021-36f1413e-5933-4cda-910c-8b7eac5e3221.JPG)
+
 
 where `z` is the measurement vector and `x'` is the predicted state space. `K` is the Kalman gain just used for calculation purposes and `R` is the measurement noise.
 
