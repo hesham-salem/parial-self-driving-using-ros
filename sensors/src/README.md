@@ -1,31 +1,19 @@
-# Extended Kalman Filter
+# Kalman Filter
 
 Sensor fusion algorithm using LiDAR and RADAR data to track moving objects, predicting and updating dynamic state estimation.
 
-![GIF](images/extended_kalman_filter.gif)
 
 
-This project implements the extended Kalman Filter for tracking a moving object. The intention is to measure the object's position and velocity.
+This project implements the  Kalman Filter for tracking a moving object. The intention is to measure the object's position and velocity.
 
-Since we are only interested in 2D movement, the state variables are `px`,`py`,`vx`,`vy`. The sensors used for detecting the object are RADAR and Laser (LiDAR). The advantage of having multiple types of sensors which are fused is higher performance. The laser has better position accuracy, but the RADAR measures the velocity directly by using the Doppler Effect. The input data for the algorithm is synthetic, meaning that there are not real measurements from real sensors.  
+Since we are only interested in 2D movement, the state variables are `px`,`py`,`vx`,`vy`. The sensors used for detecting the object are RADAR and Laser (LiDAR). The advantage of having multiple types of sensors which are fused is higher performance. The laser has better position accuracy, but the RADAR measures the velocity directly by using the Doppler Effect.
  
 This project is implemented in C++ using the Eigen library. The source code is located in `FusionEKF.cpp` and `kalman_filter.cpp` files in the `src` folder above. 
 
-The simulator for this project can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
 
-To run the code, from the terminal use:
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. ./ExtendedKF
-
-The starter code for this project is provided by Udacity and can be found [here](https://github.com/udacity/CarND-Extended-Kalman-Filter-Project)
-At the same location you can find installation details.
 
 
 ## Prediction
-
 The Kalman Filter works in a sequence of `Prediction` - `Update` cyclically computed. Each time a new measurement is received from one of the sensors, a prediction is computed first. 
 
 The Kalman Filter prediction equations are the following:
@@ -170,156 +158,4 @@ P_ = (I - K * H_) * P_;
 This is LiDAR's best feature, being able to detect objects with a precision of about 2 centimeters.
 
 
-## Measurement Update - RADAR
 
-RADAR measures the environment around using polar coordinates. A RADAR measurement implies range (object's distance from the sensor), bearing (object's angle in sensor's coordinates) and range rate (object's velocity in the range direction).
-
-![radar_measurement](images/radar_measurement.JPG)
-
-The measurement function is defined to shape the predicted state estimation into the sensor measurement form.
-
-![radar_meas_fct](images/radar_meas_fct.JPG)
-
-Given that polar coordinates are transformed into cartesian, the resulting measurement function is below:
-
-![radar_meas_fct_act](images/radar_meas_fct_act.JPG)
-
-This function could be performed on the predicted state estimation, but the problem is its non-linearity.
-Non linear functions applied to Gaussian distribution lead to non Gaussian resulting distributions. To linearize, the first derivative of the `h` function is calculated with respect to each variable of the state estimation vector. This is called the Jacobian `Hj`.
-
-![jacobian](images/jacobian.JPG)
-
-
-The Jacobian matrix needs to be calculated at each cycle because the state estimation vector changes and the derivatives need to be calculated in different points. 
-
-```
-MatrixXd Hj(3,4);
-
-// recover state parameters
-float px = x_state(0);
-float py = x_state(1);
-float vx = x_state(2);
-float vy = x_state(3);
-float pxysqr = powf(px, 2) + powf(py, 2);
-float pxysqrrt =  hypotf(px, py);
-
-// check division by zero
-if (fabs(pxysqr) < 0.0001) {
-  cout << "CalculateJacobian () - Error - Division by Zero" << endl;
-  return Hj;
-}
-
-// compute the Jacobian matrix  
-Hj << px/pxysqrrt, py/pxysqrrt, 0, 0,
-      -py/pxysqr, px/pxysqr, 0, 0,
-      py*(vx*py-vy*px)/powf(pxysqrrt,3), px*(vy*px-vx*py)/powf(pxysqrrt,3), px/pxysqrrt, py/pxysqrrt;
-
-return Hj; 
-```
-
-This is to be used for the Extended aspect of the Kalman Filter, which represents the need to linearize non-linear functions by taking the tangent in the respective point so transformation can be applied and the Gaussian covariance is kept. 
-
-Calculate `z_pred` by applying the `h` nonlinear function to the predicted state estimation. Vector `y` is the error between the prediction and the measurement.
-
-```
-// transform predicted state from cartesian to polar coordinates
-// h fuction is applied since the transformation is non linear
-float zp1 = hypotf(px, py);
-float zp2 = atan2(py,px);
-if (fabs(zp1) < 0.0001) {
-  cout << "UpdateEKF () - Error - Division by Zero" << endl;
-  return;
-}
-float zp3 = (px*vx + py*vy)/zp1;
-
-// assembly predicted z vector in polar coordinates
-VectorXd z_pred(3);
-z_pred << zp1, zp2, zp3;
-VectorXd y = z - z_pred;
-```
-
-Use the Jacobian to calculate the Kalman gain and update the state estimation and covariance matrix.
-
-```
-// calculate the Extended Kalman Filter matrices using the Jacobian to linearize the measurement function
-MatrixXd Hjt = Hj_.transpose();
-MatrixXd S = Hj_ * P_ * Hjt + R_;
-MatrixXd Si = S.inverse();
-MatrixXd PHt = P_ * Ht;
-MatrixXd K = PHjt * Si;
-
-//new estimate
-x_ = x_ + (K * y);
-long x_size = x_.size();
-MatrixXd I = MatrixXd::Identity(x_size, x_size);
-P_ = (I - K * Hj_) * P_;
-```
-
-`R_` for RADAR is 
-```
-//measurement covariance matrix - radar
-R_radar_ << 0.09, 0, 0,
-            0, 0.0009, 0,
-            0, 0, 0.09;
-```
-
-The values are taken from the RADAR sensor specs.
-
-
-## Calculate RMSE
-
-Root Mean Squared Error is used to evaluate the performance of the algorithm. The object's estimated position using the Extended Kalman Filter is compared with the ground truth. 
-
-![RMSE](images/RMSE.JPG)
-
-The goal of the project is to get `px` , `py` RMSE below `.11` meters and `vx` , `vy` RMSE below `.52` meters per second.
-
-After checking that the size of the estimation vector is not zero and that the estimations and the ground truth data match in size, I loop over all estimations and subtract the ground truth values. 
-
-Because I am using VectorXd from Eigen library, vectors can be subtracted directly. 
-
-```
-// accumulate squared residuals
-  for (int i=0; i < estimations.size(); ++i) {
-    // calculate residuals
-    r = estimations[i]-ground_truth[i];
-    r = r.array()*r.array();
-
-    //cout << r << endl;
-    sqr_residuals.push_back(r);
-  }  
-
-```
-
-Now that we have the error vector for each cycle we can raise to the power of 2. All these squared residuals are kept in: `vector <VectorXd> sqr_residuals; `
-
-```
-  // calculate the mean
-  for (int i=0; i < sqr_residuals.size(); ++i) {
-    rmse = rmse + sqr_residuals[i];
-  }
-  rmse = rmse.array()/sqr_residuals.size();
-
-  // calculate the squared root
-  rmse = rmse.array().sqrt();
-
-  // return the result
-  return rmse;
-```
-
-This is a convenient format because now I can sum them up and divide by the number of cycles to calculate the mean, and finally extract the squared root. This provides a four element vector that is the result the function returns. 
-
-
-The Extended Kalman Filter is run on the simulator and its tracking values are compared to the ground truth. The results are good, position is tracked within 10 centimeters per direction and velocity within 0.5 meters per second per direction.
-
-![results](images/results.JPG)
-
-The main challenges are curved trajectories and non zero acceleration. At `Time Step = 499` the state estimation and covariance matrix are the following:
-
-![x_P](images/x_P.JPG)
-
-Even if `P_` was initialized only with variances, the standard deviation for each state value, it builds information about covariances. This is because the uncetrainty of `vx`, for example, has an impact on the estimation of `x` and so on.
-
-[![ExtendedKalmanFilter](https://img.youtube.com/vi/uNLgVoCxvGA/0.jpg)](https://www.youtube.com/watch?v=uNLgVoCxvGA)
-
- Click on the image to see the video!
