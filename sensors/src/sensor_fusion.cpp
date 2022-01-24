@@ -36,11 +36,9 @@ int main(int argc, char **argv)
 
 {
     vector<MeasurementPackage> measurement_pack_list;
-    vector<GroundTruthPackage> gt_pack_list;
     sensors::x_state x_state; //the same name
     unsigned char sensor_type;
        MeasurementPackage meas_package;
-       GroundTruthPackage gt_package;
         long long timestamp;
 
 //////////////////////////////////////// intialization
