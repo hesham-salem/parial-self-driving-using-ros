@@ -6,10 +6,8 @@
 #include <vector>
 #include <stdlib.h>
 #include "Eigen/Dense"
-#include "ground_truth_package.h"
 #include "measurement_package.h"
 #include "FusionEKF.h"
-#include "tools.h"
 using namespace std;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
