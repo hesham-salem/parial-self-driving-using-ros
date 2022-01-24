@@ -7,6 +7,7 @@ driving mode
 driving assistant 
 
 partial self driving 
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/36461250/150872338-4a7e1381-976c-4ac7-b3f7-0922ddbe19f5.png)
 
 
 ## Hardware component :
